@@ -180,7 +180,7 @@ func fetchGitHubContent(repo, path, lastMod string) ([]byte, string, error) {
 
 	resp, err := httpClient.Do(req)
 	if err != nil {
-		return nil, "", fmt.Errorf("error fetching GitHub content: %v", err)
+		return nil, "", fmt.Errorf("error fetching GitHub content from %q: %v", url, err)
 	}
 	defer resp.Body.Close()
 
@@ -985,7 +985,7 @@ func (b *Bot) checkGitHubUpdates(sub Subscription) error {
 	// Fetch GitHub content
 	newData, newLastMod, err := fetchGitHubContent(sub.Repo, sub.Path, sub.LastMod)
 	if err != nil {
-		return fmt.Errorf("error fetching GitHub content: %v", err)
+		return fmt.Errorf("error fetching GitHub content from %s %s: %v", sub.Repo, sub.Path, err)
 	}
 
 	if newData == nil {
