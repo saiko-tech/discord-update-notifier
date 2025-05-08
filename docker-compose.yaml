@@ -1,0 +1,13 @@
+services:
+  bot:
+    build:
+      context: .
+    image: steamdb-update-notifier-bot
+    container_name: steamdb-update-notifier-bot
+    restart: unless-stopped
+    environment:
+      - DISCORD_TOKEN=${DISCORD_TOKEN:?required}
+    volumes:
+      - type: bind
+        source: ./data
+        target: /app/data
