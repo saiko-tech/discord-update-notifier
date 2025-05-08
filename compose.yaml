@@ -1,8 +1,6 @@
 services:
   bot:
-    build:
-      context: .
-    image: steamdb-update-notifier-bot
+    build: .
     container_name: steamdb-update-notifier-bot
     restart: unless-stopped
     environment:
